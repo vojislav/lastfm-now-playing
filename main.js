@@ -1,7 +1,8 @@
-base_url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&api_key=069b66ee4d6a7f5e860db3af52c19ab0&limit=1&user="
-username = "vojoh"
-url = base_url + username
+LASTFM_API_KEY = "d74f9fdb9c79a50ffac2ca0700892ca1"
+username = "vojoh" // change username here
+url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
 
+// get t
 function httpGet(url) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false); // false for synchronous request
@@ -9,6 +10,7 @@ function httpGet(url) {
     return xmlHttp.responseText;
 }
 
+// converts unix time to relative time text (eg. 2 hours ago)
 function relativeTime(time, time_text) {
     var time_now = Math.round(Date.now() / 1000)
     var time_diff = time_now - time

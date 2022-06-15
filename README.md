@@ -1,6 +1,6 @@
 # Last.fm Now Playing
 
-a html widget that shows the currently playing or last played song for a Last.fm user, along with the album art and time when played
+a html widget that shows the currently playing or last played song for a Last.fm user, along with the album art and refresh button
 
 ![widget](widget.png)
 

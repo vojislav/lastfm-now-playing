@@ -28,16 +28,19 @@ html {
     color: white;
 }
 
-span#refresh {
-    font-family: ArimoFont;
+table {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.refresh {
     position: absolute;
-    right: 5px;
-    bottom: 5px;
-    font-size: 16px;
+    bottom: 10px;
+    right: 10px;
 }
 
 td {
-    vertical-align: center;
+    vertical-align: middle;
 }
 
 a {

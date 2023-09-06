@@ -1,23 +1,23 @@
 @font-face {
     font-family: ArimoFont;
-    src: url(../fonts/Arimo-Regular.ttf);
+    src: url(/fonts/Arimo-Regular.ttf);
 }
 
 @font-face {
     font-family: ArimoFont;
-    src: url(../fonts/Arimo-Bold.ttf);
+    src: url(/fonts/Arimo-Bold.ttf);
     font-weight: bold;
 }
 
 @font-face {
     font-family: ArimoFont;
-    src: url(../fonts/Arimo-Italic.ttf);
+    src: url(/fonts/Arimo-Italic.ttf);
     font-style: italic;
 }
 
 @font-face {
     font-family: ArimoFont;
-    src: url(../fonts/Arimo-BoldItalic.ttf);
+    src: url(/fonts/Arimo-BoldItalic.ttf);
     font-weight: bold;
     font-style: italic;
 }

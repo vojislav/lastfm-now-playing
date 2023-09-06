@@ -1,14 +1,14 @@
 // get your own last.fm api key from https://www.last.fm/api/account/create
-LASTFM_API_KEY = "d74f9fdb9c79a50ffac2ca0700892ca1"
-username = "vojoh" // change username here
-url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
+const LASTFM_API_KEY = "d74f9fdb9c79a50ffac2ca0700892ca1"
+const username = "vojoh" // change username here
+const url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
 
 // make API call
 function httpGet(url) {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", url, false); // false for synchronous request
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
+    xmlHttp.open("GET", url, false);
+	xmlHttp.send(null);
+	return xmlHttp.responseText;
 }
 
 // converts unix time to relative time text (eg. 2 hours ago)
@@ -34,7 +34,7 @@ function relativeTime(time, time_text) {
         return time_text
 }
 
-var json = JSON.parse(httpGet(url))
+var json = JSON.parse(httpGet(url));
 var last_track = json.recenttracks.track[0]
 var track = last_track.name
 var trackLink = last_track.url
@@ -61,7 +61,7 @@ trackLinkElem.target = "_blank"
 trackLinkElem.textContent = track
 
 userLinkElem = document.createElement('a')
-userLinkElem.href = "https://www.last.fm/user/vojoh"
+userLinkElem.href = "https://www.last.fm/user/" + username
 userLinkElem.target = "_blank"
 userLinkElem.textContent = (relative_time != null) ? relative_time : "Now playing..."
 

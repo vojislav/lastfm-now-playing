@@ -34,12 +34,14 @@ function relativeTime(time, time_text) {
         return time_text
 }
 
-var json = JSON.parse(httpGet(url));
+fetch(url).then((res) => {
+    res.json().then((json) => {
 var last_track = json.recenttracks.track[0]
 var track = last_track.name
 var trackLink = last_track.url
 var artist = last_track.artist['#text']
 let relative_time = null
+
 if (last_track.date) {
     var unix_date = last_track.date.uts
     var date_text = last_track.date["#text"]
@@ -75,3 +77,5 @@ console.log(
     "Track: " + track + "\n" +
     "Date: " + relative_time + "\n" +
     "Now playing: " + now_playing)
+})
+})

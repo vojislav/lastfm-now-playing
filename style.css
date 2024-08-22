@@ -55,3 +55,7 @@ a#track {
 a:hover {
     color: #6DDAB9;
 }
+
+#heart {
+    margin: 0px 10px;
+}

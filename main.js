@@ -1,7 +1,7 @@
 // get your own last.fm api key from https://www.last.fm/api/account/create
 const LASTFM_API_KEY = "d74f9fdb9c79a50ffac2ca0700892ca1"
 const username = "vojoh" // change username here
-const url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
+const url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&extended=true&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
 
 // make API call
 function httpGet(url) {
@@ -47,6 +47,7 @@ if (last_track.date) {
 }
 var now_playing = (last_track["@attr"] == undefined) ? false : true
 var imageLink = last_track.image[1]["#text"]
+var loved = last_track.loved == "1"
 
 trackElem = document.getElementById('track')
 artistElem = document.getElementById('artist')
@@ -60,12 +61,17 @@ trackLinkElem.href = trackLink
 trackLinkElem.target = "_blank"
 trackLinkElem.textContent = track
 
+heartSpan = document.createElement('span')
+heartSpan.id = 'heart'
+heartSpan.textContent = loved ? "❤️" : ""
+
 userLinkElem = document.createElement('a')
 userLinkElem.href = "https://www.last.fm/user/" + username
 userLinkElem.target = "_blank"
 userLinkElem.textContent = (relative_time != null) ? relative_time : "Now playing..."
 
 trackElem.appendChild(trackLinkElem)
+trackElem.appendChild(heartSpan)
 artistElem.textContent = artist
 dateElem.appendChild(userLinkElem)
 albumcoverElem.src = imageLink
@@ -74,4 +80,5 @@ console.log(
     "Artist: " + artist + "\n" +
     "Track: " + track + "\n" +
     "Date: " + relative_time + "\n" +
-    "Now playing: " + now_playing)
+    "Now playing: " + now_playing + "\n" +
+    "Loved: " + loved)

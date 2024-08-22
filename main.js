@@ -38,7 +38,7 @@ var json = JSON.parse(httpGet(url));
 var last_track = json.recenttracks.track[0]
 var track = last_track.name
 var trackLink = last_track.url
-var artist = last_track.artist['#text']
+var artist = last_track.artist.name
 let relative_time = null
 if (last_track.date) {
     var unix_date = last_track.date.uts

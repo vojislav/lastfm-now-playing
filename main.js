@@ -38,6 +38,7 @@ var json = JSON.parse(httpGet(url));
 var last_track = json.recenttracks.track[0]
 var track = last_track.name
 var trackLink = last_track.url
+var artistLink = last_track.artist.url
 var artist = last_track.artist.name
 let relative_time = null
 if (last_track.date) {
@@ -61,6 +62,12 @@ trackLinkElem.href = trackLink
 trackLinkElem.target = "_blank"
 trackLinkElem.textContent = track
 
+artistLinkElem = document.createElement('a')
+artistLinkElem.id = 'artist'
+artistLinkElem.href = artistLink
+artistLinkElem.target = "_blank"
+artistLinkElem.textContent = artist
+
 heartSpan = document.createElement('span')
 heartSpan.id = 'heart'
 heartSpan.textContent = loved ? "❤️" : ""
@@ -72,7 +79,7 @@ userLinkElem.textContent = (relative_time != null) ? relative_time : "Now playin
 
 trackElem.appendChild(trackLinkElem)
 trackElem.appendChild(heartSpan)
-artistElem.textContent = artist
+artistElem.appendChild(artistLinkElem)
 dateElem.appendChild(userLinkElem)
 albumcoverElem.src = imageLink
 

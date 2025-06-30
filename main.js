@@ -1,7 +1,7 @@
 // get your own last.fm api key from https://www.last.fm/api/account/create
 const LASTFM_API_KEY = "d74f9fdb9c79a50ffac2ca0700892ca1"
 const username = "vojoh" // change username here
-const url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&extended=true&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
+const url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&format=json&api_key=" + LASTFM_API_KEY + "&limit=1&user=" + username
 
 // make API call
 function httpGet(url) {
@@ -38,8 +38,7 @@ var json = JSON.parse(httpGet(url));
 var last_track = json.recenttracks.track[0]
 var track = last_track.name
 var trackLink = last_track.url
-var artistLink = last_track.artist.url
-var artist = last_track.artist.name
+var artist = last_track.artist['#text']
 let relative_time = null
 if (last_track.date) {
     var unix_date = last_track.date.uts
@@ -48,7 +47,6 @@ if (last_track.date) {
 }
 var now_playing = (last_track["@attr"] == undefined) ? false : true
 var imageLink = last_track.image[1]["#text"]
-var loved = last_track.loved == "1"
 
 trackElem = document.getElementById('track')
 artistElem = document.getElementById('artist')
@@ -62,24 +60,13 @@ trackLinkElem.href = trackLink
 trackLinkElem.target = "_blank"
 trackLinkElem.textContent = track
 
-artistLinkElem = document.createElement('a')
-artistLinkElem.id = 'artist'
-artistLinkElem.href = artistLink
-artistLinkElem.target = "_blank"
-artistLinkElem.textContent = artist
-
-heartSpan = document.createElement('span')
-heartSpan.id = 'heart'
-heartSpan.textContent = loved ? "❤️" : ""
-
 userLinkElem = document.createElement('a')
 userLinkElem.href = "https://www.last.fm/user/" + username
 userLinkElem.target = "_blank"
-userLinkElem.textContent = (relative_time != null) ? relative_time : "Now playing..."
+userLinkElem.textContent = (relative_time != null) ? relative_time : "now playing..."
 
 trackElem.appendChild(trackLinkElem)
-trackElem.appendChild(heartSpan)
-artistElem.appendChild(artistLinkElem)
+artistElem.textContent = artist
 dateElem.appendChild(userLinkElem)
 albumcoverElem.src = imageLink
 
@@ -87,5 +74,4 @@ console.log(
     "Artist: " + artist + "\n" +
     "Track: " + track + "\n" +
     "Date: " + relative_time + "\n" +
-    "Now playing: " + now_playing + "\n" +
-    "Loved: " + loved)
+    "Now playing: " + now_playing)

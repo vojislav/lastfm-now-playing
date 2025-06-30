@@ -43,6 +43,14 @@ td {
     vertical-align: middle;
 }
 
+td#cover {
+	padding-right: 5px;
+}
+
+td#date {
+	font-style: italic;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -54,8 +62,4 @@ a#track {
 
 a:hover {
     color: #6DDAB9;
-}
-
-#heart {
-    margin: 0px 10px;
 }
